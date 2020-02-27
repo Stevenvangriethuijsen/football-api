@@ -18,8 +18,22 @@ router.get("/team", async (req, res, next) => {
 
 router.post("/team", async (req, res, next) => {
   try {
-    const team = await Team.create(req.body);
-    res.status(201).json(team);
+    const createTeam = await Team.create(req.body);
+    res.status(201).json(createTeam);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/team/:id", async (req, res, next) => {
+  try {
+    const teamId = req.params.id;
+    const singleTeam = await Team.findByPk(teamId);
+    if (singleTeam) {
+      res.json(singleTeam);
+    } else {
+      res.status(404).end();
+    }
   } catch (error) {
     next(error);
   }

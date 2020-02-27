@@ -10,4 +10,4 @@ db.sync()
   .then(() => console.log("Database schema updated"))
   .catch(console.error);
 
-module.export = db;
+module.exports = db;

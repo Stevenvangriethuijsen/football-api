@@ -16,4 +16,13 @@ router.get("/team", async (req, res, next) => {
   }
 });
 
+router.post("/team", async (req, res, next) => {
+  try {
+    const team = await Team.create(req.body);
+    res.status(201).json(team);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

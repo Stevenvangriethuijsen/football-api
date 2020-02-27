@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const Player = require("./model");
+const Team = require("../team/model");
 
 const router = new Router();
 
@@ -28,7 +29,7 @@ router.post("/player", async (req, res, next) => {
 router.get("/player/:id", async (req, res, next) => {
   try {
     const playerId = req.params.id;
-    const singlePlayer = await Player.findByPk(playerId);
+    const singlePlayer = await Player.findByPk(playerId, { include: [Team] });
     if (singlePlayer) {
       res.json(singlePlayer);
     } else {
